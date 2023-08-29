@@ -16,7 +16,7 @@ jobs:
 
     - name: Build & Push Docker Image
       env:
-        GITHUB_TOKEN: ${{ secrets.SPARK_GITHUB_TOKEN }}
+        TOKEN: ${{ secrets.TOKEN }}
       run: |
         docker build -t ghcr.io/tarunratan/yarn-demo-app:latest .
         docker login ghcr.io -u tarunratan -p "$TOKEN"
