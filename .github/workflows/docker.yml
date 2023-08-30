@@ -19,7 +19,11 @@ jobs:
       env:
         TOKEN: ${{ secrets.TOKEN }}
       run: |
-        docker build -t ghcr.io/tarunratan/yarn-demo-app:latest .
-        echo $TOKEN | docker login ghcr.io --username tarunratan --password-stdin && docker push ghcr.io/tarunratan/yarn-demo-app:latest
+       # docker build -t ghcr.io/tarunratan/yarn-demo-app:latest .
+        echo "${{ secrets.TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin 
+        docker build  -t ghcr.io/${{ github.repository_owner }}/yarn-demo-app:latest -f Dockerfile . &&  docker push ghcr.io/${{ github.repository_owner }}/yarn-demo-app:latest 
+
+
+        #        echo $TOKEN | docker login ghcr.io --username tarunratan --password-stdin && docker push ghcr.io/tarunratan/yarn-demo-app:latest
 
 
